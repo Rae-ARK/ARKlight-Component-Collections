@@ -1,6 +1,6 @@
-This file only exists as a pre docs initiated content. After that, all this content gets folded into appropriate places. And this file is removed.
+# ACC — Foundational Design Document
 
-"""ARKlight Components Collection
+ARKlight Components Collection
 ACC
 Foundational Design Document
 
@@ -10,7 +10,7 @@ Scope: Foundational
 Audience: ARKlight contributors and component authors
 
 
-# 1. Overview
+## 1. Overview
 
 ACC, the ARKlight Components Collection, is the package and distribution
 system for ARKlight capabilities.
@@ -37,7 +37,7 @@ ACC defines how those packages become discoverable and usable as ARKlight
 capabilities.
 
 
-# 2. The Problem
+## 2. The Problem
 
 ARKlight's authoring model is intentionally Python-based.
 
@@ -86,7 +86,7 @@ Python packaging solves the first problem.
 ACC exists to solve the second.
 
 
-# 3. Definition
+## 3. Definition
 
 ACC is ARKlight's distributable collection of third-party and first-party
 authoring capabilities, components, and compiler extensions.
@@ -100,7 +100,7 @@ ACC packages may be implemented using normal Python packaging mechanisms.
 ACC does not require a separate Python language or execution environment.
 
 
-# 4. Relationship With Python Packaging
+## 4. Relationship With Python Packaging
 
 ACC should build on Python packaging rather than reinvent it.
 
@@ -134,7 +134,7 @@ The compiler should reuse established packaging mechanisms wherever they are
 appropriate.
 
 
-# 5. What an ACC Package Can Provide
+## 5. What an ACC Package Can Provide
 
 An ACC package may provide one or more of the following:
 
@@ -164,7 +164,7 @@ small and explicit.
 New capability classes can be added as the compiler architecture matures.
 
 
-# 6. Closed Vocabulary
+## 6. Closed Vocabulary
 
 ACC must not undermine ARKlight's closed-vocabulary architecture.
 
@@ -205,7 +205,7 @@ ACC extends the vocabulary deliberately.
 It does not turn Python imports into an unrestricted compiler escape hatch.
 
 
-# 7. Authoring Functions
+## 7. Authoring Functions
 
 An ACC package may expose a Python function as an ARKlight authoring
 construct.
@@ -239,7 +239,7 @@ and:
     ARKlight execution / generated artifacts.
 
 
-# 8. Package Metadata
+## 8. Package Metadata
 
 An ACC package requires metadata sufficient for the compiler to determine
 what the package is and whether it can be used.
@@ -264,7 +264,7 @@ The metadata should preferably live alongside normal Python project metadata
 rather than creating an entirely separate packaging format.
 
 
-# 9. Capability Declaration
+## 9. Capability Declaration
 
 A capability should have an explicit identity.
 
@@ -290,7 +290,7 @@ That distinction becomes important when multiple environments or compiler
 backends eventually implement the same semantic capability differently.
 
 
-# 10. Discovery
+## 10. Discovery
 
 ACC packages should be discoverable through standard Python package
 metadata.
@@ -314,7 +314,7 @@ This provides a deterministic boundary between the Python package ecosystem
 and the ARKlight compiler.
 
 
-# 11. Package Names
+## 11. Package Names
 
 ACC packages should have a recognizable ARKlight identity.
 
@@ -335,7 +335,7 @@ The CLI is responsible for translating ACC identifiers into package
 resolution requests.
 
 
-# 12. CLI
+## 12. CLI
 
 The initial user-facing interface should be simple.
 
@@ -370,7 +370,7 @@ ARKlight's developer workflow rather than requiring users to understand the
 underlying Python packaging machinery.
 
 
-# 13. Installation
+## 13. Installation
 
 Installing an ACC package should perform the following conceptual steps:
 
@@ -395,7 +395,7 @@ ACC packages remain external distributions.
 The compiler discovers them through the supported extension interface.
 
 
-# 14. Dependencies
+## 14. Dependencies
 
 ACC packages may depend on other ACC packages.
 
@@ -426,7 +426,7 @@ For example:
 must all be satisfied before the package is usable.
 
 
-# 15. ARKlight Compatibility
+## 15. ARKlight Compatibility
 
 An ACC package must declare which ARKlight compiler versions it supports.
 
@@ -446,7 +446,7 @@ ARKlight's compiler philosophy applies here too:
     explicit failure is preferable to semantic guessing.
 
 
-# 16. Versioning
+## 16. Versioning
 
 ACC packages have their own versions.
 
@@ -473,7 +473,7 @@ The exact version syntax should follow established Python packaging
 conventions where possible.
 
 
-# 17. Local and Offline Packages
+## 17. Local and Offline Packages
 
 ACC should not require a network connection for every installation.
 
@@ -493,7 +493,7 @@ A package installed from a local source should still pass the same metadata
 and compatibility validation as a registry package.
 
 
-# 18. Registry
+## 18. Registry
 
 ACC requires a package index or registry for convenient discovery.
 
@@ -519,7 +519,7 @@ The long-term registry should provide:
     publication information
 
 
-# 19. Trust and Security
+## 19. Trust and Security
 
 ACC introduces an extension boundary into the compiler.
 
@@ -546,7 +546,7 @@ ACC should start with capabilities which remain within well-defined
 ARKlight compiler semantics.
 
 
-# 20. No Arbitrary Compiler Execution
+## 20. No Arbitrary Compiler Execution
 
 ACC should not become:
 
@@ -569,7 +569,7 @@ This preserves:
     security boundaries
 
 
-# 21. Compilation Model
+## 21. Compilation Model
 
 An ACC capability should ultimately participate in the normal ARKlight
 compiler pipeline.
@@ -605,7 +605,7 @@ A capability should not need to invent its own parallel rendering system
 unless explicitly supported by the compiler architecture.
 
 
-# 22. Backend Independence
+## 22. Backend Independence
 
 ACC capabilities should distinguish semantic definitions from backend
 implementations.
@@ -630,7 +630,7 @@ If a package does not support a target, ARKlight should diagnose the
 unsupported use at compile time.
 
 
-# 23. Environments
+## 23. Environments
 
 ARKlight has an evolving distinction between compilation mechanisms and
 execution contexts.
@@ -647,7 +647,7 @@ system.
 Future environment support can build on the same semantic capability model.
 
 
-# 24. Components
+## 24. Components
 
 Components are one of the most obvious ACC use cases.
 
@@ -673,7 +673,7 @@ The final generated artifact does not need to contain the ACC package or
 the component's Python implementation.
 
 
-# 25. Assets
+## 25. Assets
 
 An ACC package may also provide static resources.
 
@@ -695,7 +695,7 @@ Unused package resources should remain outside the output unless referenced
 by the compiled program.
 
 
-# 26. Documentation
+## 26. Documentation
 
 ACC packages should be able to expose documentation.
 
@@ -721,7 +721,7 @@ This is particularly useful once ARKlight's documentation retrieval and
 assistant systems become more mature.
 
 
-# 27. Compiler Diagnostics
+## 27. Compiler Diagnostics
 
 ACC failures should use normal ARKlight diagnostics.
 
@@ -744,7 +744,7 @@ The compiler should not silently select an arbitrary provider when two
 packages claim the same capability.
 
 
-# 28. Duplicate Capabilities
+## 28. Duplicate Capabilities
 
 Capability identity must be deterministic.
 
@@ -765,7 +765,7 @@ Humans have spent decades discovering that "whatever happened first" is not
 a dependency-management strategy.
 
 
-# 29. First-Party and Third-Party Packages
+## 29. First-Party and Third-Party Packages
 
 ACC should support both first-party and third-party packages.
 
@@ -779,7 +779,7 @@ A package being first-party does not remove the need for metadata and
 compatibility validation.
 
 
-# 30. Core vs ACC
+## 30. Core vs ACC
 
 Not every ARKlight capability should become an ACC package.
 
@@ -800,7 +800,7 @@ A useful boundary is:
 The boundary should remain conservative during alpha development.
 
 
-# 31. Installation State
+## 31. Installation State
 
 The package manager should maintain enough local state to answer:
 
@@ -818,7 +818,7 @@ A future lockfile may be desirable for reproducible projects.
 Until then, package state should remain inspectable and recoverable.
 
 
-# 32. Reproducibility
+## 32. Reproducibility
 
 ACC should support reproducible compilation.
 
@@ -839,7 +839,7 @@ Exact resolution and lockfile semantics can be introduced after the basic
 package manager is operational.
 
 
-# 33. Update Behavior
+## 33. Update Behavior
 
 Updates should be explicit.
 
@@ -861,7 +861,7 @@ changes that state.
 This separation keeps compilation predictable.
 
 
-# 34. Removal
+## 34. Removal
 
 Removing an ACC package should remove its installed distribution and make
 its capabilities unavailable.
@@ -872,7 +872,7 @@ fail with a clear diagnostic.
 ARKlight should not attempt to silently replace the capability.
 
 
-# 35. Alpha Scope
+## 35. Alpha Scope
 
 The first ACC implementation should remain deliberately small.
 
@@ -904,7 +904,7 @@ Those can be addressed when the underlying compiler extension model is
 stable.
 
 
-# 36. Suggested Initial Commands
+## 36. Suggested Initial Commands
 
 The initial CLI may provide:
 
@@ -928,7 +928,7 @@ Examples:
 The exact syntax remains subject to CLI conventions.
 
 
-# 37. Example Package Model
+## 37. Example Package Model
 
 A conceptual ACC package might contain:
 
@@ -955,7 +955,7 @@ The exact metadata schema is intentionally deferred until the compiler-side
 extension API is defined.
 
 
-# 38. Design Principles
+## 38. Design Principles
 
 ACC follows several principles.
 
@@ -984,7 +984,7 @@ ACC follows several principles.
 12. The core compiler should remain smaller than the ecosystem around it.
 
 
-# 39. Architectural Summary
+## 39. Architectural Summary
 
 The intended relationship is:
 
@@ -1023,7 +1023,7 @@ Python provides the authoring ecosystem.
 The generated artifact remains the result of ARKlight compilation.
 
 
-# 40. Status
+## 40. Status
 
 ACC is an ARKlight alpha proposal.
 
@@ -1048,7 +1048,7 @@ and add ARKlight semantics only where ARKlight actually has a different
 problem to solve.
 
 
-# 41. Non-Goals
+## 41. Non-Goals
 
 ACC is not:
 
@@ -1065,7 +1065,7 @@ ACC exists to make ARKlight extensible without making the compiler
 architecturally uncontrolled.
 
 
-# 42. Closing
+## 42. Closing
 
 ARKlight's Python authoring model makes reusable Python distributions
 possible from the beginning.
@@ -1090,4 +1090,4 @@ The IR carries the semantics.
 
 The target compiler produces the artifact.
 
-That is the boundary ACC should preserve."""
+That is the boundary ACC should preserve.
