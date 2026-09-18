@@ -2,18 +2,22 @@
 
 ## Status
 
-**Stage 0 (this document): filed.** Stages 1-5 below are *planned,
-not built* -- this file is the entire deliverable of Stage 0. No ACC
-package code and no ARKlight core change exists yet. This is the
-same role `docs/Implementation/JS-VOCABULARY-ADDENDUM-v0.070.md`
-plays on `alpha`: turning "should we?" into "here's the landing
-order," one stage at a time, each stage small enough to land and be
-verified on its own.
+**Stage 0 (this document): filed. Stage 1: landed on `alpha`.**
+Stages 2-5 below remain *planned, not built* -- no ACC package code
+exists yet in this repo. This is the same role
+`docs/Implementation/JS-VOCABULARY-ADDENDUM-v0.070.md` plays on
+`alpha`: turning "should we?" into "here's the landing order," one
+stage at a time, each stage small enough to land and be verified on
+its own.
 
 _Written against ARKlight `alpha` as cloned for reference -- treated
-as **read-only**. Nothing in this ladder edits `alpha` directly; Stage
-1 is a dependency *on* alpha gaining a small hook, filed as a proposal
-against that repo, not work this repo can complete unilaterally._
+as **read-only**. Nothing in this ladder edits `alpha` directly. Stage
+1 was filed as a proposal against that repo rather than work this repo
+could complete unilaterally, and has since landed there as
+`arklight/capabilities.py`, with `tests/test_capabilities.py` passing
+(9/9). The real discovery path now exists on `alpha`; Stages 3-5 are
+no longer confined to designed-and-tested-in-isolation code exercised
+only through direct calls._
 
 ## Why these two tracks, together, first
 
@@ -67,23 +71,24 @@ none today.
 
 ## The five stages
 
-| Stage | Delivers | Lives in |
-| --- | --- | --- |
-| 0 | This document -- ladder, tool choice, acceptance criteria. | `ACC` (this repo) |
-| 1 | Minimal capability-discovery hook | `ARKlight` core (**upstream dependency, not this repo's to build**) |
-| 2 | ACC package skeleton + capability metadata shape | `ACC` (this repo) |
-| 3 | `@acc/prism` -- the Pygments capability | `ACC` (this repo) |
-| 4 | `@acc/common` -- first common-use components, consuming Stage 3 | `ACC` (this repo) |
-| 5 | Installability: `arklight install/list/info` against a local package | `ARKlight` core + `ACC` (**joint, upstream-gated**) |
+| Stage | Delivers | Lives in | Status |
+| --- | --- | --- | --- |
+| 0 | This document -- ladder, tool choice, acceptance criteria. | `ACC` (this repo) | Filed |
+| 1 | Minimal capability-discovery hook | `ARKlight` core (**upstream dependency, not this repo's to build**) | **Landed** |
+| 2 | ACC package skeleton + capability metadata shape | `ACC` (this repo) | Not started |
+| 3 | `@acc/prism` -- the Pygments capability | `ACC` (this repo) | Not started |
+| 4 | `@acc/common` -- first common-use components, consuming Stage 3 | `ACC` (this repo) | Not started |
+| 5 | Installability: `arklight install/list/info` against a local package | `ARKlight` core + `ACC` (**joint, upstream-gated**) | Not started |
 
-### Stage 1 -- capability-discovery hook (upstream, blocked on alpha)
+### Stage 1 -- capability-discovery hook (upstream, **landed on alpha**)
 
-Nothing past Stage 0 can run without this, and it is deliberately
+Nothing past Stage 0 can run without this, and it was deliberately
 **not** ACC's to build unilaterally -- `acc-foundational-design.md`
 §39 already draws ACC as sitting *beside* the compiler, and a
-compiler-side discovery hook is, definitionally, compiler-side. What
-Stage 1 needs, precisely, so it can be filed as a proposal against
-`alpha` rather than guessed at by this repo:
+compiler-side discovery hook is, definitionally, compiler-side. It has
+since landed on `alpha` as `arklight/capabilities.py`, matching every
+point below. What Stage 1 needed, precisely, filed as a proposal
+against `alpha` rather than guessed at by this repo:
 
 - An entry-point group name ARKlight scans for -- `acc-foundational-
   design.md` §10 already proposes `arklight.capabilities`; Stage 1
@@ -105,10 +110,20 @@ Stage 1 needs, precisely, so it can be filed as a proposal against
 
 Acceptance for Stage 1: a throwaway local package with one dummy
 entry point is discoverable by an `alpha` build without editing
-`arklight`'s own source for that package specifically. Until this
-lands, Stages 3-5 exist as designed-and-tested-in-isolation code
-that must be exercised through direct calls rather than through the
-real discovery path.
+`arklight`'s own source for that package specifically. **Landed**,
+with a nuance: `tests/test_capabilities.py` (9/9 passing) exercises
+this by monkeypatching `importlib.metadata.entry_points` rather than
+installing a real throwaway distribution -- an approach this same
+paragraph pre-authorized for anything built before an end-to-end
+package exists. The registration contract, entry-point group name,
+and all three required diagnostics (`CapabilityError` for a bad/failed
+entry point, a missing or invalid identity, and a duplicate identity
+without `allow_multi` declared) are implemented and covered. A
+`require_capability()` lookup helper also shipped, ahead of schedule,
+for future consumers such as Stage 4's `CodeBlock`. Stages 3-5 are no
+longer confined to designed-and-tested-in-isolation code exercised
+only through direct calls -- the real discovery path now exists on
+`alpha`.
 
 ### Stage 2 -- ACC package skeleton + capability metadata shape
 
