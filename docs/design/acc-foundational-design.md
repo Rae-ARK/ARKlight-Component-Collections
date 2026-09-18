@@ -25,6 +25,23 @@ the core compiler.
 
 ACC provides that mechanism.
 
+The intended relationship to the compiler is the one `npm` has to
+Node.js, not the one a plugin has to the program that loads it: a
+separate tool, with its own namespace and lifecycle, that resolves
+and installs packages which the compiler then *discovers* through
+the entry-point mechanism in Section 10 -- not a mechanism that
+compiles itself into ARKlight's own source. See
+[`BUILD-TIME-ECOSYSTEM.md`](BUILD-TIME-ECOSYSTEM.md) for that analogy
+worked through in full, including the one place it and `npm` differ
+(ACC packages are not automatically trusted the way `npm` packages
+are -- Section 19 below still applies), and for the concrete case
+that makes this urgent: ARKlight's existing, unrestricted
+compile-time Python execution (verified against `alpha`'s
+`arklight/parser/loader.py`) is real and useful today, but currently
+hand-rolled per project with no shared identity, versioning, or
+diagnostics -- exactly the gap ACC's package/capability model below
+is meant to close.
+
 An ACC package may provide components, authoring functions, actions,
 derivations, predicates, compiler-recognized vocabulary, styles, templates,
 static assets, or other ARKlight-specific extensions.
